@@ -1,0 +1,93 @@
+﻿@model IEnumerable<DotnetPractical.Models.Student>
+
+@{
+	ViewData["Title"] = "GetStudentDetails";
+}
+
+<h1>GetStudentDetails</h1>
+
+
+<div>
+	<form asp-action="SearchSTudentByName" asp-controller="Student">
+		<div class="form-group">
+			<input class="form-control" name="Search"/>
+		</div>
+		<div>
+			<button class="btn btn-dark" type="submit">Search By Name</button>
+		</div>
+		<div class="col-md-6">
+			<a asp-action="GetStudentDetails" class="text-dark">Back To FullList</a>
+		</div>
+	</form>
+
+	@*<div class="row">
+		<div class="col-md-6">
+			<form class="d-flex" asp-action="SearchSTudentByName" asp-controller="Student">
+				<input name="SearchString" class="form-control me-1" type="search" placeholder="Search" aria-label="Search" /> 
+				<button class="btn btn-dark" type="submit">Search By Name</button>
+
+			</form>
+		</div>
+		<div class="col-md-6">
+			<a asp-action="GetStudentDetails" class="text-dark">Back To FullList</a>
+		</div>
+
+	</div>*@
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Student_Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Student_Age)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Standard)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Image)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Stuent_RollNo)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Student_Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Student_Age)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Standard)
+				</td>
+				<td>
+					@if (item.Image is not null)
+					{
+						<img src="data:image/png;base64,@Convert.ToBase64String(item.Image)" width="50px" height="ss50px" alt="Picture" />
+					}
+					else
+					{
+						<p>No Image Found</p>
+					}
+					
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Stuent_RollNo)
+				</td>
+				@*<td>
+					<a asp-action="Edit" asp-route-id="@item.Student_Id">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Student_Id">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Student_Id">Delete</a>
+				</td>*@
+			</tr>
+		}
+	</tbody>
+</table>
